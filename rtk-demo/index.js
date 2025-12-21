@@ -1,4 +1,5 @@
 const store = require('./app/store');
+const { fetchUsers } = require('./features/user/userSlice');
 const cakeActions = require('./features/cake/cakeSlice').cakeActions;
 const icecreamActions =
   require('./features/icecream/icecreamSlice').icecreamActions;
@@ -6,10 +7,12 @@ const icecreamActions =
 console.log(`Initial State: ${JSON.stringify(store.getState())}`);
 
 const unsubscribe = store.subscribe(() => {
-  // Uncommented this log statement to see logger middleware in action
-  // console.log(`Updated State: ${JSON.stringify(store.getState())}`); 
+  // Uncomment this log statement to see logger middleware in action
+  console.log(`Updated State: ${JSON.stringify(store.getState())}`);
 });
 
+store.dispatch(fetchUsers());
+/*
 store.dispatch(cakeActions.ordered());
 store.dispatch(cakeActions.ordered());
 store.dispatch(cakeActions.ordered());
@@ -21,5 +24,5 @@ store.dispatch(icecreamActions.ordered());
 store.dispatch(icecreamActions.ordered());
 
 store.dispatch(icecreamActions.restocked(3));
-
-unsubscribe();
+*/
+// unsubscribe();

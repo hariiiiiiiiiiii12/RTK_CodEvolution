@@ -82,6 +82,12 @@ const iceCreamReducer = (state = initialIceCreamState, action) => {
         ...state,
         numOfIceCreams: state.numOfIceCreams + action.payload,
       };
+    case CAKE_ORDERED:
+      return {
+        ...state,
+        numOfIceCreams: state.numOfIceCreams - 1,
+      };
+
     default:
       return state;
   }
@@ -94,12 +100,13 @@ const rootReducer = combineReducers({
 });
 
 // The created store's initialState will be the initialState we have created.
-const store = redux.createStore(rootReducer, applyMiddleware(logger));
+// const store = redux.createStore(rootReducer, applyMiddleware(logger));
+const store = redux.createStore(rootReducer);
 console.log(`Initial State: ${JSON.stringify(store.getState())}`);
 
 // listener function attached to store that runs on every update of state.
 const unsubscribe = store.subscribe(() => {
-  //   console.log(`Updated state: ${JSON.stringify(store.getState())}`);
+    console.log(`Updated state: ${JSON.stringify(store.getState())}`);
 });
 
 // dispatching an action ---> calls reducer function which returns the updated state ----> On every such call, we have the listener function listening to state updated and logs to the console the updated state.
